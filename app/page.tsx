@@ -1,5 +1,8 @@
+"use client";
+
+import { Typography } from "@mui/material";
 import { Layout, ListWrapper } from "./components";
-import { MOCK_DATA } from "./utils/mock_data";
+import { MOCK_DATA } from "./mock/mock_data";
 
 export default function Home() {
   return (
@@ -8,8 +11,13 @@ export default function Home() {
         {MOCK_DATA.map((item, index) => (
           <ListWrapper.Item
             key={item.id}
-            text={item.name}
+            title={item.name}
             imgUrl={index % 2 === 0 ? item.portrait : undefined}
+            ContentComponent={() => <Typography>{item.albumCount}</Typography>}
+            buttonConfig={{
+              value: "Részletek",
+              onClick: () => alert("clikkkkkk"),
+            }}
           />
         ))}
       </ListWrapper>

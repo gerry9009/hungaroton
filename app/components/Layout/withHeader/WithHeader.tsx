@@ -1,8 +1,11 @@
-import { Box, Container } from "@mui/material";
+import React from "react";
+
 import { Header } from "../Header";
 import { Footer } from "../Footer";
+
+import { Box, Container } from "@mui/material";
+
 import { WithHeaderProps } from "./WithHeader.type";
-import { BaseLayout } from "../BaseLayout";
 
 export const WithHeader = ({
   children,
@@ -33,4 +36,4 @@ export const WithHeader = ({
   );
 };
 
-export default WithHeader;
+export default React.memo(WithHeader);

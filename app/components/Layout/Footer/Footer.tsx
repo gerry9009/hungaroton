@@ -1,5 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import React from "react";
+
 import { FooterProps } from "./Footer.type";
+
+import { Box, Typography } from "@mui/material";
 
 export const Footer = ({ footerString }: FooterProps) => {
   return (
@@ -20,3 +23,5 @@ export const Footer = ({ footerString }: FooterProps) => {
     </Box>
   );
 };
+
+export default React.memo(Footer);

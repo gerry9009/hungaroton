@@ -1,8 +1,10 @@
 import React from "react";
 
-import { Grid, Typography } from "@mui/material";
-import { ListWrapperProps } from "./ListWrapper.type";
 import { EmptyList } from "../EmptyList";
+
+import { Grid, Typography } from "@mui/material";
+
+import { ListWrapperProps } from "./ListWrapper.type";
 
 export const ListWrapper = ({
   title,
@@ -23,11 +25,10 @@ export const ListWrapper = ({
   return (
     <Grid
       spacing={{ xs: 2, md: 3 }}
-      columns={{ xs: 1, sm: 2, md: 4 }}
+      columns={{ xs: 1, sm: 2, md: 3 }}
       container
       justifyContent="center"
-      alignItems="center"
-      sx={{ width: "100%" }}
+      alignItems="stretch"
     >
       <Typography
         variant="h4"
@@ -42,4 +43,4 @@ export const ListWrapper = ({
   );
 };
 
-export default ListWrapper;
+export default React.memo(ListWrapper);

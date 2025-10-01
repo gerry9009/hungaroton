@@ -1,5 +1,9 @@
 export interface ListItemProps {
-  text: string;
+  title: string;
   imgUrl?: string;
-  contentChildren?: React.ReactNode;
+  ContentComponent?: React.ElementType;
+  buttonConfig?: {
+    value: string;
+    onClick: () => void;
+  };
 }

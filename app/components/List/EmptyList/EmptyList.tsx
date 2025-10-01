@@ -1,4 +1,7 @@
+import React from "react";
+
 import { Box, Typography } from "@mui/material";
+
 import InboxIcon from "@mui/icons-material/Inbox";
 
 export const EmptyList = () => (
@@ -19,4 +22,4 @@ export const EmptyList = () => (
   </Box>
 );
 
-export default EmptyList;
+export default React.memo(EmptyList);

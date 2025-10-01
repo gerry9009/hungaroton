@@ -1,58 +1,143 @@
-import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+import React from "react";
+
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Grid,
+  Typography,
+} from "@mui/material";
+
 import { ListItemProps } from "./ListItem.type";
 
-export const ListItem = ({ text, imgUrl, contentChildren }: ListItemProps) => {
-  return (
-    <Card
-      variant="outlined"
-      sx={{
-        minWidth: 275,
-        borderColor: "divider",
-        borderWidth: 2,
-        borderStyle: "solid",
-      }}
-    >
-      {imgUrl ? (
+import InsertPhotoIcon from "@mui/icons-material/InsertPhoto";
+
+export const ListItem = ({
+  title,
+  imgUrl,
+  ContentComponent,
+  buttonConfig,
+}: ListItemProps) => {
+  const renderImage = () => {
+    if (imgUrl) {
+      return (
         <CardMedia
           component="img"
           sx={{
             width: "100%",
-            maxHeight: 150,
+            maxHeight: 175,
             height: "auto",
             aspectRatio: "1/1",
             objectFit: "cover",
           }}
           src={imgUrl}
-          alt={text}
+          alt={title}
         />
-      ) : (
+      );
+    }
+
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          height: 175,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          bgcolor: "background.default",
+        }}
+      >
+        <InsertPhotoIcon sx={{ fontSize: 40, color: "grey.500" }} />
+      </Box>
+    );
+  };
+
+  const renderTitle = () => (
+    <Box
+      py={4}
+      sx={{
+        height: "3rem",
+        display: "flex",
+        alignItems: "center",
+        borderBottom: "1px solid",
+        borderColor: "divider",
+      }}
+    >
+      <Typography
+        variant="h6"
+        gutterBottom
+        sx={{
+          color: "text.primary",
+        }}
+      >
+        {title}
+      </Typography>
+    </Box>
+  );
+
+  const renderContent = () => {
+    if (ContentComponent) {
+      return (
         <Box
+          mt={2}
           sx={{
-            width: "100%",
-            height: 150,
             display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            bgcolor: "background.default",
           }}
         >
-          <InsertPhotoIcon sx={{ fontSize: 40, color: "grey.500" }} />
+          <ContentComponent />
         </Box>
-      )}
-      <CardContent>
-        <Typography
-          variant="h5"
-          component="div"
-          gutterBottom
-          sx={{ color: "text.primary", fontSize: 14 }}
+      );
+    }
+
+    return null;
+  };
+
+  const renderButton = () => {
+    if (buttonConfig) {
+      const { value, onClick } = buttonConfig;
+      return (
+        <Box
+          mt={2}
+          pt={2}
+          sx={{
+            display: "flex",
+            justifyContent: "flex-end",
+            borderTop: "1px solid",
+            borderColor: "divider",
+          }}
         >
-          {text}
-        </Typography>
-        {contentChildren}
-      </CardContent>
-    </Card>
+          <Button size="small" variant="contained" onClick={onClick}>
+            {value}
+          </Button>
+        </Box>
+      );
+    }
+
+    return null;
+  };
+
+  return (
+    <Grid size={1}>
+      <Card
+        variant="outlined"
+        sx={{
+          minWidth: 275,
+          borderColor: "divider",
+          borderWidth: 2,
+          borderStyle: "solid",
+        }}
+      >
+        {renderImage()}
+        <CardContent>
+          {renderTitle()}
+          {renderContent()}
+          {renderButton()}
+        </CardContent>
+      </Card>
+    </Grid>
   );
 };
 
-export default ListItem;
+export default React.memo(ListItem);

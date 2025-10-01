@@ -1,5 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import React from "react";
+
 import { HeaderProps } from "./Header.type";
+
+import { Box, Typography } from "@mui/material";
 
 export const Header = ({ title }: HeaderProps) => {
   return (
@@ -20,4 +23,4 @@ export const Header = ({ title }: HeaderProps) => {
   );
 };
 
-export default Header;
+export default React.memo(Header);

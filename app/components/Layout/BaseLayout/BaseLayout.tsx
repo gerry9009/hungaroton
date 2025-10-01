@@ -1,4 +1,7 @@
+import React from "react";
+
 import { Box, Container } from "@mui/material";
+
 import { BaseLayoutProps } from "./BaseLayout.type";
 
 export const BaseLayout = ({ children }: BaseLayoutProps) => {
@@ -24,4 +27,4 @@ export const BaseLayout = ({ children }: BaseLayoutProps) => {
   );
 };
 
-export default BaseLayout;
+export default React.memo(BaseLayout);
