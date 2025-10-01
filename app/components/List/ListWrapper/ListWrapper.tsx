@@ -2,19 +2,44 @@ import React from "react";
 
 import { EmptyList } from "../EmptyList";
 
-import { Grid, Typography } from "@mui/material";
+import { Box, Grid, Skeleton, Typography } from "@mui/material";
 
 import { ListWrapperProps } from "./ListWrapper.type";
 
 export const ListWrapper = ({
   title,
   children,
+  loading = false,
   EmptyComponent,
 }: ListWrapperProps) => {
   const count = React.Children.count(children);
   const hasChildren = count > 0;
 
   const renderContent = () => {
+    if (loading) {
+      return Array.from({ length: 9 }).map((_, index) => (
+        <Grid size={1} key={index}>
+          <Box
+            sx={{
+              minWidth: 275,
+              borderColor: "divider",
+              borderWidth: 2,
+              borderStyle: "solid",
+            }}
+          >
+            <Skeleton variant="rectangular" height={250} />
+            <Skeleton
+              variant="text"
+              sx={{
+                height: "3rem",
+              }}
+            />
+            <Skeleton variant="text" width="60%" />
+          </Box>
+        </Grid>
+      ));
+    }
+
     if (hasChildren) {
       return children;
     }
