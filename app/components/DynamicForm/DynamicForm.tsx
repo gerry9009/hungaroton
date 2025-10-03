@@ -58,6 +58,7 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 value={values[field.name] ?? ""}
                 onChange={(e) => handleChange(field.name, e.target.value)}
                 multiline
+                data-testid={`form-field-${field.name}`}
               />
             );
           }
@@ -79,6 +80,7 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                   }
                   label={field.label}
                   displayEmpty={field.allowEmpty}
+                  data-testid={`form-field-${field.name}`}
                   onChange={(e: SelectChangeEvent) =>
                     handleChange(field.name, e.target.value)
                   }

@@ -16,7 +16,7 @@ export const Header = ({ title }: HeaderProps) => {
         backgroundColor: "background.paper",
       }}
     >
-      <Typography variant="h5" color="text.primary">
+      <Typography variant="h5" color="text.primary" data-testid="page-title">
         {title}
       </Typography>
     </Box>
