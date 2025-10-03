@@ -1,16 +1,12 @@
 "use client";
 
 import { Layout } from "@/app/components";
-import {
-  Button,
-  Card,
-  CardContent,
-  CardMedia,
-  Typography,
-  Box,
-} from "@mui/material";
-import AlbumIcon from "@mui/icons-material/Album";
+import { CONTENT_TEXTS } from "@/app/constants";
+
+import { Button, Card, CardContent, Typography, Box } from "@mui/material";
+
 import { useRouter, useSearchParams } from "next/navigation";
+import { useRenderArtistComponent } from "./page.hooks";
 
 export const HomePage = () => {
   const router = useRouter();
@@ -20,76 +16,11 @@ export const HomePage = () => {
   const portrait = searchParams.get("img");
   const albums = Number(searchParams.get("albums")) || 0;
 
-  const renderImage = () => {
-    if (portrait) {
-      return (
-        <CardMedia
-          component="img"
-          sx={{
-            width: "100%",
-            maxHeight: 450,
-            height: "auto",
-            objectFit: "cover",
-          }}
-          src={portrait}
-          alt={name ?? "portrait"}
-        />
-      );
-    }
-
-    return (
-      <Box
-        sx={{
-          width: "100%",
-          height: 450,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          bgcolor: "background.default",
-        }}
-      >
-        <AlbumIcon sx={{ fontSize: 80, color: "grey.500" }} />
-      </Box>
-    );
-  };
-
-  const renderAlbums = () => {
-    if (albums === 0) {
-      return (
-        <Typography
-          variant="subtitle1"
-          sx={{ textAlign: "center", mt: 2, color: "text.secondary" }}
-        >
-          Nincsenek albumok
-        </Typography>
-      );
-    }
-
-    return (
-      <>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            flexWrap: "wrap",
-            gap: 1,
-            mt: 2,
-          }}
-        >
-          {Array.from({ length: albums }).map((_, i) => (
-            <AlbumIcon key={i} color="primary" fontSize="large" />
-          ))}
-        </Box>
-
-        <Typography
-          variant="subtitle1"
-          sx={{ textAlign: "center", mt: 2, color: "text.secondary" }}
-        >
-          Összesen: {albums} album
-        </Typography>
-      </>
-    );
-  };
+  const { renderImage, renderAlbums } = useRenderArtistComponent({
+    name,
+    portrait,
+    albums,
+  });
 
   return (
     <Layout>
@@ -127,7 +58,7 @@ export const HomePage = () => {
 
       <Box sx={{ mt: 3, textAlign: "center" }}>
         <Button variant="contained" onClick={() => router.back()}>
-          Vissza
+          {CONTENT_TEXTS.artistDetails.backButton}
         </Button>
       </Box>
     </Layout>

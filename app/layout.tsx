@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Geist } from "next/font/google";
 import "./globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./utils/theme";
 import { QueryProvider } from "./services/QueryProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Hungaroton Artist",
   description: "Hungaroton Artist Discography",
+  keywords: "Hungaroton, Artist, Discography, Music, Albums",
 };
 
 export default function RootLayout({
@@ -21,10 +16,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="hu">
       <ThemeProvider theme={theme}>
-        <CssBaseline />
         <QueryProvider>
+          <CssBaseline />
           <body>{children}</body>
         </QueryProvider>
       </ThemeProvider>

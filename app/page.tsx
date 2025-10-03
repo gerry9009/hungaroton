@@ -1,8 +1,11 @@
 "use client";
 
-import { Layout } from "@/app/components";
-import { Box, Button, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+
+import { Layout } from "@/app/components";
+import { CONTENT_TEXTS } from "./constants";
+
+import { Box, Button, Typography } from "@mui/material";
 
 export default function HomePage() {
   const router = useRouter();
@@ -20,14 +23,14 @@ export default function HomePage() {
         }}
       >
         <Typography variant="h3" component="h1" textAlign="center">
-          Üdv a Hungaroton katalógusban
+          {CONTENT_TEXTS.home.welcome}
         </Typography>
         <Typography
           variant="subtitle1"
           textAlign="center"
           color="text.secondary"
         >
-          Böngészd a művészeket és fedezd fel a zenéiket!
+          {CONTENT_TEXTS.home.welcomeMessage}
         </Typography>
 
         <Button
@@ -35,7 +38,7 @@ export default function HomePage() {
           size="large"
           onClick={() => router.push("/artists")}
         >
-          Művészek listája
+          {CONTENT_TEXTS.home.button}
         </Button>
       </Box>
     </Layout>
