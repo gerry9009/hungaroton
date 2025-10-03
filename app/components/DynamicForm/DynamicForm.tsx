@@ -16,7 +16,11 @@ import { useState } from "react";
 import { DynamicFormProps, FieldType } from "./DynamicForm.types";
 
 export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
-  const [values, setValues] = useState<Record<string, any>>({});
+  const initialValues = fields.reduce((acc, field) => {
+    if (field.defaultValue !== undefined) acc[field.name] = field.defaultValue;
+    return acc;
+  }, {} as Record<string, any>);
+  const [values, setValues] = useState<Record<string, any>>(initialValues);
 
   const handleChange = (name: string, value: string | number | null) => {
     const newValues = { ...values, [name]: value };
@@ -66,7 +70,13 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 <Select
                   labelId={`${field.name}-label`}
                   id={`${field.name}-field`}
-                  value={values[field.name] ?? ""}
+                  // value={values[field.name] ?? ""}
+                  value={
+                    values[field.name] ??
+                    (field.type === FieldType.Select && field.allowEmpty
+                      ? ""
+                      : undefined)
+                  }
                   label={field.label}
                   displayEmpty={field.allowEmpty}
                   onChange={(e: SelectChangeEvent) =>
