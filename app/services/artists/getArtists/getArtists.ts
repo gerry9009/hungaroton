@@ -4,7 +4,7 @@ import { ArtistsFilter, GetArtistsResponse } from "./getArtists.types";
 export const getArtists = async ({
   includeImage = true,
   pageLength = 50,
-  pageNumber = 1,
+  page = 1,
   search,
   type,
   letter,
@@ -13,7 +13,7 @@ export const getArtists = async ({
     params: {
       include_image: includeImage,
       per_page: pageLength,
-      page: pageNumber,
+      page,
       ...(search ? { search } : {}),
       ...(type ? { type } : {}),
       ...(letter ? { letter } : {}),

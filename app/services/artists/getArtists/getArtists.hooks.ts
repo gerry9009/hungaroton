@@ -6,5 +6,6 @@ export const useArtists = (params: ArtistsFilter) => {
   return useQuery({
     queryKey: ["artists", params],
     queryFn: () => getArtists(params),
+    placeholderData: (prev) => prev,
   });
 };

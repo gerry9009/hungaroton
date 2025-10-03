@@ -7,7 +7,7 @@ export interface GetArtistsResponse {
 
 export interface ArtistsFilter {
   includeImage?: boolean;
-  pageNumber?: number;
+  page?: number;
   pageLength?: number;
   search?: string;
   type?: ArtistsType | undefined;
