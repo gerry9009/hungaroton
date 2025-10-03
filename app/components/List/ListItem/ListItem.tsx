@@ -25,6 +25,7 @@ export const ListItem = ({
       return (
         <CardMedia
           component="img"
+          loading="lazy"
           sx={{
             width: "100%",
             maxHeight: 175,
