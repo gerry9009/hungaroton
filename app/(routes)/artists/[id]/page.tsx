@@ -126,7 +126,7 @@ export const HomePage = () => {
       </Card>
 
       <Box sx={{ mt: 3, textAlign: "center" }}>
-        <Button variant="contained" onClick={() => router.push(`/`)}>
+        <Button variant="contained" onClick={() => router.back()}>
           Vissza
         </Button>
       </Box>
