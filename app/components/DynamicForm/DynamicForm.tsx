@@ -57,6 +57,7 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 fullWidth={field.fullWidth ?? true}
                 value={values[field.name] ?? ""}
                 onChange={(e) => handleChange(field.name, e.target.value)}
+                multiline
               />
             );
           }
@@ -70,7 +71,6 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 <Select
                   labelId={`${field.name}-label`}
                   id={`${field.name}-field`}
-                  // value={values[field.name] ?? ""}
                   value={
                     values[field.name] ??
                     (field.type === FieldType.Select && field.allowEmpty

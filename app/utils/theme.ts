@@ -1,6 +1,6 @@
 "use client";
 
-import { createTheme } from "@mui/material/styles";
+import { createTheme, responsiveFontSizes } from "@mui/material/styles";
 import { green, grey } from "@mui/material/colors";
 
 export const theme = createTheme({
@@ -26,6 +26,23 @@ export const theme = createTheme({
   typography: {
     fontFamily: "'Inter', 'Roboto', sans-serif",
   },
+  components: {
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          color: "#E0E0E0",
+          "&.Mui-selected": {
+            backgroundColor: green[500],
+            color: "#fff",
+            fontWeight: "bold",
+            "&:hover": {
+              backgroundColor: green[600],
+            },
+          },
+        },
+      },
+    },
+  },
 });
 
-export default theme;
+export default responsiveFontSizes(theme);

@@ -28,7 +28,7 @@ export const ListItem = ({
           loading="lazy"
           sx={{
             width: "100%",
-            maxHeight: 175,
+            maxHeight: { xs: 120, sm: 150, md: 175 },
             height: "auto",
             aspectRatio: "1/1",
             objectFit: "cover",
@@ -43,7 +43,7 @@ export const ListItem = ({
       <Box
         sx={{
           width: "100%",
-          height: 175,
+          maxHeight: { xs: 120, sm: 150, md: 175 },
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -57,13 +57,12 @@ export const ListItem = ({
 
   const renderTitle = () => (
     <Box
-      py={4}
       sx={{
-        height: "3rem",
         display: "flex",
         alignItems: "center",
         borderBottom: "1px solid",
         borderColor: "divider",
+        minHeight: { xs: "3.6rem", sm: "4.2rem", md: "4.8rem" },
       }}
     >
       <Typography
@@ -71,6 +70,12 @@ export const ListItem = ({
         gutterBottom
         sx={{
           color: "text.primary",
+          display: "-webkit-box",
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: "vertical",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          lineHeight: 1.2,
         }}
       >
         {title}
@@ -109,7 +114,14 @@ export const ListItem = ({
             borderColor: "divider",
           }}
         >
-          <Button size="small" variant="contained" onClick={onClick}>
+          <Button
+            sx={{
+              fontSize: { xs: "0.75rem", sm: "0.875rem", md: "1rem" },
+              padding: { xs: "4px 8px", sm: "6px 12px", md: "8px 16px" },
+            }}
+            variant="contained"
+            onClick={onClick}
+          >
             {value}
           </Button>
         </Box>
