@@ -1,26 +1,43 @@
 "use client";
 
-import { Typography } from "@mui/material";
-import { Layout, ListWrapper } from "./components";
-import { MOCK_DATA } from "./mock/mock_data";
+import { Layout } from "@/app/components";
+import { Box, Button, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
-export default function Home() {
+export default function HomePage() {
+  const router = useRouter();
+
   return (
-    <Layout.withHeader title="My App" footerString="Company">
-      <ListWrapper title="My List">
-        {MOCK_DATA.map((item, index) => (
-          <ListWrapper.Item
-            key={item.id}
-            title={item.name}
-            imgUrl={index % 2 === 0 ? item.portrait : undefined}
-            ContentComponent={() => <Typography>{item.albumCount}</Typography>}
-            buttonConfig={{
-              value: "Részletek",
-              onClick: () => alert("clikkkkkk"),
-            }}
-          />
-        ))}
-      </ListWrapper>
-    </Layout.withHeader>
+    <Layout>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          height: "70vh",
+          gap: 4,
+        }}
+      >
+        <Typography variant="h3" component="h1" textAlign="center">
+          Üdv a Hungaroton katalógusban
+        </Typography>
+        <Typography
+          variant="subtitle1"
+          textAlign="center"
+          color="text.secondary"
+        >
+          Böngészd a művészeket és fedezd fel a zenéiket!
+        </Typography>
+
+        <Button
+          variant="contained"
+          size="large"
+          onClick={() => router.push("/artists")}
+        >
+          Művészek listája
+        </Button>
+      </Box>
+    </Layout>
   );
 }
