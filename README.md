@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hungaroton Artists
 
-## Getting Started
+A Next.js alapú webalkalmazás, amely a Hungaroton művészeinek listázását és részletes megjelenítését teszi lehetővé.
 
-First, run the development server:
+## Technológiák
+
+- **Next.js 14** - React keretrendszer SSR támogatással
+- **TypeScript** - Típusos JavaScript fejlesztéshez
+- **Material-UI (MUI)** - React komponens könyvtár
+- **TanStack Query** - Szerver állapot kezelés és cache-elés
+- **Axios** - HTTP kliens
+- **ESLint** - Kód minőség ellenőrzés
+- **Cypress** - E2E tesztelés
+
+## Funkciók
+
+- Művészek listázása lapozással (50 művész/oldal)
+- Szűrési lehetőségek:
+  - Keresés név alapján
+  - Szűrés típus szerint (előadó, szerző, elsődleges)
+  - Szűrés kezdőbetű szerint
+- Művész részletes adatlapja
+- Reszponzív design
+- URL alapú szűrés (URLSearchParams)
+
+## Telepítés és Futtatás
+
+### Előfeltételek
+
+- Node.js 18.x vagy újabb
+- npm 9.x vagy újabb
+
+### Telepítés
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+# Repository klónozása
+git clone <repository-url>
+cd hungaroton-artists
+
+# Függőségek telepítése
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Fejlesztői Környezet
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+# Fejlesztői szerver indítása
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+A fejlesztői szerver alapértelmezetten a http://localhost:3000 címen érhető el.
 
-## Learn More
+### Build és Produkciós Környezet
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+# Produkciós build készítése
+npm run build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Produkciós szerver indítása
+npm start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Tesztek Futtatása
 
-## Deploy on Vercel
+```bash
+# E2E tesztek futtatása (Cypress)
+npm run cypress:open   # Interaktív módban
+npm run cypress:run    # Headless módban
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Projekt Struktúra
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+hungaroton-artists/
+├── app/                    # Next.js alkalmazás gyökér
+│   ├── (routes)/          # Oldal komponensek
+│   │   ├── artists/       # Művészek listája
+│   │   └── artists/[id]/  # Művész részletek
+│   ├── components/        # Újrafelhasználható komponensek
+│   ├── hooks/            # Egyedi React hook-ok
+│   ├── lib/              # Utility és konfigurációs fájlok
+│   └── services/         # API szolgáltatások
+├── public/               # Statikus fájlok
+└── cypress/             # E2E tesztek
+```
+
+## Komponens Struktúra
+
+- **DynamicForm**: Dinamikus űrlap komponens különböző mezőtípusokkal
+- **Layout**: Oldal elrendezés komponensek
+  - BaseLayout
+  - Header
+  - Footer
+- **List**: Lista megjelenítés komponensek
+  - ListWrapper
+  - ListItem
+  - EmptyList
+- **PaginationBar**: Lapozás komponens
+
+## API Integráció
+
+Az alkalmazás a Hungaroton API-t használja a művészek adatainak lekéréséhez. A kommunikáció az `apiClient.ts`-ben van konfigurálva, amely az Axios-t használja.
+
+## Karbantartás és Fejlesztés
+
+- A kód TypeScript-ben íródott szigorú típusellenőrzéssel
+- ESLint szabályok biztosítják a kódminőséget
+- Cypress tesztek ellenőrzik a funkcionalitást
+- A komponensek újrafelhasználhatóak
