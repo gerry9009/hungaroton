@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import "./globals.css";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import theme from "./utils/theme";
@@ -20,7 +21,9 @@ export default function RootLayout({
       <ThemeProvider theme={theme}>
         <QueryProvider>
           <CssBaseline />
-          <body>{children}</body>
+          <Suspense>
+            <body>{children}</body>
+          </Suspense>
         </QueryProvider>
       </ThemeProvider>
     </html>

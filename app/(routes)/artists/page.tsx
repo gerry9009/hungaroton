@@ -7,17 +7,18 @@ import {
   DynamicForm,
   ListWrapper,
   PaginationBar,
+  FormValues,
 } from "@/app/components";
 
 import { formConfig } from "./page.config";
 import { useArtistFilters, useRenderArtistsComponent } from "./page.hooks";
 import { getFormFieldConfig, shouldSetSearchFilters } from "./page.utils";
 
-import { useArtists } from "@/app/services";
+import { ArtistsType, useArtists } from "@/app/services";
 import { useDebouncedValue } from "@/app/hooks";
 import { CONTENT_TEXTS } from "@/app/constants";
 
-export default function ArtistsPage() {
+const ArtistsPage = () => {
   const { search, type, letter, page, setFilters } = useArtistFilters();
   const [localSearch, setLocalSearch] = useState(search);
   const debouncedSearch = useDebouncedValue(localSearch, 800);
@@ -53,18 +54,18 @@ export default function ArtistsPage() {
         letter,
       });
     }
-  }, [debouncedSearch, setFilters, letter, search, type]);
+  }, [debouncedSearch, setFilters, search, type, letter]);
 
-  const handleFormChange = (values: Record<string, any>) => {
-    if (values.search !== localSearch) {
-      setLocalSearch(values.search);
+  const handleFormChange = (values: FormValues) => {
+    if ("search" in values && values.search !== localSearch) {
+      setLocalSearch(values.search as string);
       return;
     }
 
     setFilters({
       search,
-      type: values.type ?? undefined,
-      letter: values.letter ?? undefined,
+      type: (values.type as ArtistsType) ?? undefined,
+      letter: (values.letter as string) ?? undefined,
       page: 1,
     });
   };
@@ -105,4 +106,6 @@ export default function ArtistsPage() {
       />
     </Layout.withHeader>
   );
-}
+};
+
+export default ArtistsPage;

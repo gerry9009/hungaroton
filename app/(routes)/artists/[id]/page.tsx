@@ -8,7 +8,7 @@ import { Button, Card, CardContent, Typography, Box } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useRenderArtistComponent } from "./page.hooks";
 
-export const HomePage = () => {
+const ArtistDetailsPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -65,4 +65,4 @@ export const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default ArtistDetailsPage;

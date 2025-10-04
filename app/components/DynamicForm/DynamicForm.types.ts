@@ -46,7 +46,7 @@ export type SelectFieldConfig = SelectFieldAllowEmpty | SelectFieldNoEmpty;
 export type FormFieldConfig = TextFieldConfig | SelectFieldConfig;
 
 export interface DynamicFormProps<
-  T extends Record<string, unknown> = Record<string, unknown>
+  T extends Record<string, FormValue> = FormValues
 > {
   fields: FormFieldConfig[];
   onChange?: (values: T) => void;

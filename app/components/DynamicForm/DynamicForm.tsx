@@ -8,7 +8,6 @@ import {
   Select,
   Stack,
   TextField,
-  SelectChangeEvent,
 } from "@mui/material";
 
 import { useState } from "react";
@@ -28,23 +27,10 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
   const [values, setValues] = useState<FormValues>(initialValues);
 
   const handleChange = (name: string, value: FormValue) => {
+    console.log("Handling change for", name, "with value", value);
     const newValues: FormValues = { ...values, [name]: value };
     setValues(newValues);
     onChange?.(newValues);
-  };
-
-  const handleTextChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-    fieldName: string
-  ) => {
-    handleChange(fieldName, e.target.value);
-  };
-
-  const handleSelectChange = (
-    e: SelectChangeEvent<FormValue>,
-    fieldName: string
-  ) => {
-    handleChange(fieldName, e.target.value);
   };
 
   return (
@@ -75,7 +61,7 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 variant="outlined"
                 fullWidth={field.fullWidth ?? true}
                 value={values[field.name] ?? ""}
-                onChange={(e) => handleTextChange(e, field.name)}
+                onChange={(e) => handleChange(field.name, e.target.value)}
                 multiline
                 data-testid={`form-field-${field.name}`}
               />
@@ -91,18 +77,14 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 <Select
                   labelId={`${field.name}-label`}
                   id={`${field.name}-field`}
-                  value={
-                    values[field.name] ??
-                    (field.type === FieldType.Select && field.allowEmpty
-                      ? ""
-                      : undefined)
-                  }
+                  value={values[field.name] ?? ""}
                   label={field.label}
                   displayEmpty={field.allowEmpty}
                   data-testid={`form-field-${field.name}`}
-                  onChange={(e) => handleSelectChange(e, field.name)}
+                  onChange={(e) => handleChange(field.name, e.target.value)}
                   renderValue={(selected) => {
                     if (selected === "") {
+                      return "";
                     }
                     const option = field.options.find(
                       (opt) => opt.value === selected
