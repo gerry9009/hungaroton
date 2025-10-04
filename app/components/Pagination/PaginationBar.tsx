@@ -1,3 +1,5 @@
+import React from "react";
+
 import theme from "@/app/utils/theme";
 import { Box, Pagination, useMediaQuery } from "@mui/material";
 import { PaginationBarProps } from "./PaginationBar.type";
@@ -30,4 +32,4 @@ export const PaginationBar = ({ ...props }: PaginationBarProps) => {
   );
 };
 
-export default PaginationBar;
+export default React.memo(PaginationBar);

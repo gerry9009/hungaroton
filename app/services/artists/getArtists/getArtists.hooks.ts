@@ -8,5 +8,6 @@ export const useArtists = (params: ArtistsFilter) => {
     queryFn: () => getArtists(params),
     networkMode: "offlineFirst",
     staleTime: 1000 * 60 * 5,
+    refetchOnWindowFocus: false,
   });
 };
