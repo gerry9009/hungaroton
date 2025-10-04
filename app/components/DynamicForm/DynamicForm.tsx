@@ -27,7 +27,6 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
   const [values, setValues] = useState<FormValues>(initialValues);
 
   const handleChange = (name: string, value: FormValue) => {
-    console.log("Handling change for", name, "with value", value);
     const newValues: FormValues = { ...values, [name]: value };
     setValues(newValues);
     onChange?.(newValues);

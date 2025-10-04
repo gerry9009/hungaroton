@@ -6,5 +6,7 @@ export const useArtists = (params: ArtistsFilter) => {
   return useQuery({
     queryKey: ["artists", params],
     queryFn: () => getArtists(params),
+    networkMode: "offlineFirst",
+    staleTime: 1000 * 60 * 5,
   });
 };
