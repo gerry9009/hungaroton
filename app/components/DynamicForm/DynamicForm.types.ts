@@ -4,12 +4,20 @@ export enum FieldType {
   Select = "select",
 }
 
+export type FormValue = string | number | null;
+export type FormValues = Record<string, FormValue>;
+
+export interface SelectOption {
+  label: string;
+  value: string | number;
+}
+
 export interface BaseField {
   name: string;
   label: string;
   type: FieldType;
   fullWidth?: boolean;
-  defaultValue?: string | number | null;
+  defaultValue?: FormValue;
 }
 
 export interface TextFieldConfig extends BaseField {
@@ -19,15 +27,15 @@ export interface TextFieldConfig extends BaseField {
 
 export interface SelectFieldAllowEmpty extends BaseField {
   type: FieldType.Select;
-  options: { label: string; value: string | number }[];
+  options: SelectOption[];
   allowEmpty: true;
   emptyOptionLabel: string;
-  defaultValue?: string | number | null;
+  defaultValue?: FormValue;
 }
 
 export interface SelectFieldNoEmpty extends BaseField {
   type: FieldType.Select;
-  options: { label: string; value: string | number }[];
+  options: SelectOption[];
   allowEmpty?: false;
   emptyOptionLabel?: never;
   defaultValue?: string | number | null;

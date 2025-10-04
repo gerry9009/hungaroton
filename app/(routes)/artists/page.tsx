@@ -53,7 +53,7 @@ export default function ArtistsPage() {
         letter,
       });
     }
-  }, [debouncedSearch, setFilters]);
+  }, [debouncedSearch, setFilters, letter, search, type]);
 
   const handleFormChange = (values: Record<string, any>) => {
     if (values.search !== localSearch) {

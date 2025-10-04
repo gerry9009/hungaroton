@@ -13,19 +13,38 @@ import {
 
 import { useState } from "react";
 
-import { DynamicFormProps, FieldType } from "./DynamicForm.types";
+import {
+  DynamicFormProps,
+  FieldType,
+  FormValue,
+  FormValues,
+} from "./DynamicForm.types";
 
 export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
-  const initialValues = fields.reduce((acc, field) => {
+  const initialValues = fields.reduce<FormValues>((acc, field) => {
     if (field.defaultValue !== undefined) acc[field.name] = field.defaultValue;
     return acc;
-  }, {} as Record<string, any>);
-  const [values, setValues] = useState<Record<string, any>>(initialValues);
+  }, {});
+  const [values, setValues] = useState<FormValues>(initialValues);
 
-  const handleChange = (name: string, value: string | number | null) => {
-    const newValues = { ...values, [name]: value };
+  const handleChange = (name: string, value: FormValue) => {
+    const newValues: FormValues = { ...values, [name]: value };
     setValues(newValues);
     onChange?.(newValues);
+  };
+
+  const handleTextChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    fieldName: string
+  ) => {
+    handleChange(fieldName, e.target.value);
+  };
+
+  const handleSelectChange = (
+    e: SelectChangeEvent<FormValue>,
+    fieldName: string
+  ) => {
+    handleChange(fieldName, e.target.value);
   };
 
   return (
@@ -56,7 +75,7 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                 variant="outlined"
                 fullWidth={field.fullWidth ?? true}
                 value={values[field.name] ?? ""}
-                onChange={(e) => handleChange(field.name, e.target.value)}
+                onChange={(e) => handleTextChange(e, field.name)}
                 multiline
                 data-testid={`form-field-${field.name}`}
               />
@@ -81,9 +100,7 @@ export const DynamicForm = ({ fields, onChange }: DynamicFormProps) => {
                   label={field.label}
                   displayEmpty={field.allowEmpty}
                   data-testid={`form-field-${field.name}`}
-                  onChange={(e: SelectChangeEvent) =>
-                    handleChange(field.name, e.target.value)
-                  }
+                  onChange={(e) => handleSelectChange(e, field.name)}
                   renderValue={(selected) => {
                     if (selected === "") {
                     }
