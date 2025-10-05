@@ -3,6 +3,7 @@ import React from "react";
 import { HeaderProps } from "./Header.type";
 
 import { Box, Typography } from "@mui/material";
+import Link from "next/link";
 
 export const Header = ({ title }: HeaderProps) => {
   return (
@@ -16,9 +17,20 @@ export const Header = ({ title }: HeaderProps) => {
         backgroundColor: "background.paper",
       }}
     >
-      <Typography variant="h5" color="text.primary" data-testid="page-title">
-        {title}
-      </Typography>
+      <Link
+        href="/"
+        style={{ textDecoration: "none", display: "inline-block" }}
+      >
+        <Typography
+          variant="h5"
+          color="text.primary"
+          data-testid="page-title"
+          component="span"
+          sx={{ display: "inline-block" }}
+        >
+          {title}
+        </Typography>
+      </Link>
     </Box>
   );
 };
